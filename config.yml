@@ -52,7 +52,18 @@ categories_field: &CATEGORIES_FIELD
   widget: relation
   collection: categories
   search_fields: ["title"]
-  value_field: "title"
+  value_field: "{{slug}}"
+  display_fields: ["title"]
+  required: false
+
+authors_field: &AUTHORS_FIELD
+  name: authors
+  label: Authors
+  widget: relation
+  collection: authors
+  search_fields: ["title"]
+  value_field: "{{slug}}"
+  display_fields: ["title"]
   required: false
 
 links_fields: &LINKS_FIELDS
@@ -90,6 +101,7 @@ collections:
       - { label: 'Titre', name: 'title', widget: 'string', i18n: true }
       - { label: 'Date de publication', name: 'date', widget: 'datetime', i18n: duplicate }
       - *CATEGORIES_FIELD
+      - *AUTHORS_FIELD
       - *IMAGE_FIELD
       - { label: 'Extrait', name: 'description', widget: 'text', required: false, i18n: true }
       - { label: 'Contenu', name: 'body', widget: 'markdown', required: false, i18n: true  }
@@ -107,6 +119,24 @@ collections:
     slug: '{{slug}}'
     fields:
       - { label: Titre, name: title, widget: string, i18n: true }
+  
+
+  # Categories
+  - name: 'authors'
+    label: 'Authors'
+    label_singular: 'Author'
+    folder: 'content/authors'
+    editor:
+      preview: false
+    create: true
+    #i18n: true
+    slug: '{{slug}}'
+    fields:
+      - { label: Nom, name: title, widget: string, i18n: duplicate }
+      - { label: Description, name: description, widget: text, required: false, i18n: true }
+      - { label: Email, name: email, widget: string, required: false, i18n: duplicate }
+      - { label: Twitter, name: twitter, widget: string, required: false, i18n: duplicate, hint: "Username" }
+      - { label: Site web, name: website, widget: string, required: false, i18n: duplicate }
   
   
   # Pages
