@@ -100,7 +100,7 @@ collections:
     fields:
       *BASIC_FIELDS
 
-
+  
   # Menus
   - name: menu
     label: Menus
