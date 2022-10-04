@@ -36,6 +36,16 @@ image_field: &IMAGE_FIELD
   media_folder: "/assets/images/uploads"
   public_folder: "/images/uploads"
 
+featured_image_fields: &FEATURED_IMAGE_FIELDS
+  - name: featured_image
+    label: Featured image
+    widget: object
+    fields:
+      - *IMAGE_FIELD
+      - { name: alt, label: Alternative text, widget: string, required: false, i18n: true }
+      - { name: credits, label: Credits, widget: string, required: false, i18n: true }
+      - { name: legend, label: Legend, widget: string, required: false, i18n: true }
+
 basic_fields: &BASIC_FIELDS
   - { label: "Index", name: "index", widget: "hidden", default: false, required: false, i18n: duplicate } # Hack to ignore _index
   - { label: "Brouillon", name: "draft", widget: "boolean", default: true, required: false, i18n: duplicate }
