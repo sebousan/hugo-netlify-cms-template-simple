@@ -37,23 +37,23 @@ image_field: &IMAGE_FIELD
   public_folder: "/images/uploads"
 
 featured_image_fields: &FEATURED_IMAGE_FIELDS
-  - name: featured_image
-    label: Featured image
-    widget: object
-    fields:
-      - *IMAGE_FIELD
-      - { name: alt, label: Alternative text, widget: string, required: false, i18n: true }
-      - { name: credits, label: Credits, widget: string, required: false, i18n: true }
-      - { name: legend, label: Legend, widget: string, required: false, i18n: true }
+  name: featured_image
+  label: Featured image
+  widget: object
+  fields:
+    - *IMAGE_FIELD
+    - { name: alt, label: Alternative text, widget: string, required: false, i18n: true }
+    - { name: credits, label: Credits, widget: string, required: false, i18n: true }
+    - { name: legend, label: Legend, widget: string, required: false, i18n: true }
 
-basic_fields: &BASIC_FIELDS
-  - { label: "Index", name: "index", widget: "hidden", default: false, required: false, i18n: duplicate } # Hack to ignore _index
-  - { label: "Brouillon", name: "draft", widget: "boolean", default: true, required: false, i18n: duplicate }
-  - { label: 'Titre', name: 'title', widget: 'string', i18n: true }
-  - { label: 'Date de publication', name: 'date', widget: 'datetime', i18n: duplicate }
-  - *IMAGE_FIELD
-  - { label: 'Extrait', name: 'description', widget: 'text', required: false, i18n: true }
-  - { label: 'Contenu', name: 'body', widget: 'markdown', required: false, i18n: true  }
+categories_field: &CATEGORIES_FIELD
+  name: categories
+  label: Categories
+  widget: relation
+  collection: categories
+  search_fields: ["title"]
+  value_field: "title"
+  required: false
 
 links_fields: &LINKS_FIELDS
   name: item
@@ -65,6 +65,7 @@ links_fields: &LINKS_FIELDS
     - { label: Titre, name: title, widget: string, i18n: true }
     - { label: Lien, name: link, widget: string, i18n: true }
     - { label: "Blank?", name: "blank", widget: "boolean", default: false, required: false, i18n: duplicate }
+
 
 
 
@@ -84,9 +85,30 @@ collections:
     path: "{{year}}/{{month}}/{{slug}}"
     filter: { field: index, value: false }
     fields:
-      *BASIC_FIELDS
+      - { label: "Index", name: "index", widget: "hidden", default: false, required: false, i18n: duplicate } # Hack to ignore _index
+      - { label: "Brouillon", name: "draft", widget: "boolean", default: true, required: false, i18n: duplicate }
+      - { label: 'Titre', name: 'title', widget: 'string', i18n: true }
+      - { label: 'Date de publication', name: 'date', widget: 'datetime', i18n: duplicate }
+      - *CATEGORIES_FIELD
+      - *IMAGE_FIELD
+      - { label: 'Extrait', name: 'description', widget: 'text', required: false, i18n: true }
+      - { label: 'Contenu', name: 'body', widget: 'markdown', required: false, i18n: true  }
 
 
+  # Categories
+  - name: 'categories'
+    label: 'Categories'
+    label_singular: 'Category'
+    folder: 'content/categories'
+    editor:
+      preview: false
+    create: true
+    #i18n: true
+    slug: '{{slug}}'
+    fields:
+      - { label: Titre, name: title, widget: string, i18n: true }
+  
+  
   # Pages
   - name: 'pages'
     label: 'Pages'
@@ -98,7 +120,12 @@ collections:
     #i18n: true
     slug: '{{slug}}'
     fields:
-      *BASIC_FIELDS
+      - { label: "Index", name: "index", widget: "hidden", default: false, required: false, i18n: duplicate } # Hack to ignore _index
+      - { label: "Brouillon", name: "draft", widget: "boolean", default: true, required: false, i18n: duplicate }
+      - { label: 'Titre', name: 'title', widget: 'string', i18n: true }
+      - *IMAGE_FIELD
+      - { label: 'Extrait', name: 'description', widget: 'text', required: false, i18n: true }
+      - { label: 'Contenu', name: 'body', widget: 'markdown', required: false, i18n: true  }
 
   
   # Menus
