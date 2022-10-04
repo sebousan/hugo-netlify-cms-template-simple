@@ -64,6 +64,7 @@ links_fields: &LINKS_FIELDS
   fields:
     - { label: Titre, name: title, widget: string, i18n: true }
     - { label: Lien, name: link, widget: string, i18n: true }
+    - { label: "Blank?", name: "blank", widget: "boolean", default: false, required: false, i18n: duplicate }
 
 
 
