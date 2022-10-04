@@ -22,14 +22,26 @@ slug:
   clean_accents: true
   sanitize_replacement: "-"
 
-
-
 # Fields
+image_field: &IMAGE_FIELD
+  name: 'image' 
+  label: 'Image'
+  widget: 'image' 
+  required: false 
+  i18n: duplicate 
+  media_library: 
+    config: 
+      max_file_size: 512000
+  hint: '500Ko max, Compress image before send it: https://tinypng.com/'
+  media_folder: "/assets/images/uploads"
+  public_folder: "/images/uploads"
+
 basic_fields: &BASIC_FIELDS
-  - { label: "Brouillon", name: "draft", widget: "boolean", default: true }
+  - { label: "Index", name: "index", widget: "hidden", default: false, required: false, i18n: duplicate } # Hack to ignore _index
+  - { label: "Brouillon", name: "draft", widget: "boolean", default: true, required: false, i18n: duplicate }
   - { label: 'Titre', name: 'title', widget: 'string', i18n: true }
   - { label: 'Date de publication', name: 'date', widget: 'datetime', i18n: duplicate }
-  - { label: 'Image par défaut', name: 'image', widget: 'image', required: false, i18n: duplicate }
+  - *IMAGE_FIELD
   - { label: 'Extrait', name: 'description', widget: 'text', required: false, i18n: true }
   - { label: 'Contenu', name: 'body', widget: 'markdown', required: false, i18n: true  }
 
@@ -53,19 +65,24 @@ collections:
     label: 'Posts'
     label_singular: 'Post'
     folder: 'content/posts'
+    editor:
+      preview: false
     create: true
     #i18n: true
     slug: '{{year}}-{{month}}-{{day}}-{{slug}}'
     path: "{{year}}/{{month}}/{{slug}}"
+    filter: { field: index, value: false }
     fields:
       *BASIC_FIELDS
-  
+
 
   # Pages
   - name: 'pages'
     label: 'Pages'
     label_singular: 'Page'
     folder: 'content/pages'
+    editor:
+      preview: false
     create: true
     #i18n: true
     slug: '{{slug}}'
