@@ -1,4 +1,4 @@
-# Admin Netlify CMS
+# Hugo Netlify CMS Template
 
 ## Table des matières
 
