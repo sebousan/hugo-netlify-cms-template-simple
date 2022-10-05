@@ -107,7 +107,7 @@ collections:
       - { label: 'Contenu', name: 'body', widget: 'markdown', required: false, i18n: true  }
 
 
-  # Categories
+  # Categories (taxonomy)
   - name: 'categories'
     label: 'Categories'
     label_singular: 'Category'
@@ -116,12 +116,15 @@ collections:
       preview: false
     create: true
     #i18n: true
-    slug: '{{slug}}'
+    nested:
+      depth: 2
+    slug: '{{slug}}/_index'
+    filter: { field: index, value: false }
     fields:
       - { label: Titre, name: title, widget: string, i18n: true }
   
 
-  # Categories
+  # Authors (taxonomy)
   - name: 'authors'
     label: 'Authors'
     label_singular: 'Author'
@@ -130,14 +133,33 @@ collections:
       preview: false
     create: true
     #i18n: true
-    slug: '{{slug}}'
+    filter: { field: index, value: false }
+    nested:
+      depth: 2
+    slug: '{{slug}}/_index'
     fields:
+      - { label: "Index", name: "index", widget: "hidden", default: false, required: false, i18n: duplicate } # Hack to ignore _index
       - { label: Nom, name: title, widget: string, i18n: duplicate }
       - { label: Description, name: description, widget: text, required: false, i18n: true }
       - { label: Email, name: email, widget: string, required: false, i18n: duplicate }
       - { label: Twitter, name: twitter, widget: string, required: false, i18n: duplicate, hint: "Username" }
       - { label: Site web, name: website, widget: string, required: false, i18n: duplicate }
   
+  # Index pages
+  - name: 'index'
+    label: 'Index pages'
+    folder: 'content'
+    editor:
+      preview: false
+    create: false
+    #i18n: true
+    filter: { field: index, value: true }
+    nested:
+      depth: 3
+    fields:
+      - { label: "Index", name: "index", widget: "hidden", default: true, required: false, i18n: duplicate } # Hack to ignore _index
+      - { label: Nom, name: title, widget: string, i18n: duplicate }
+      - { label: Description, name: description, widget: text, required: false, i18n: true }
   
   # Pages
   - name: 'pages'
