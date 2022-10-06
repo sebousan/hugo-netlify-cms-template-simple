@@ -42,8 +42,8 @@ hero_fields: &HERO_FIELDS
   widget: object
   required: false
   i18n: true 
+  collapsed: true
   fields:
-    - *IMAGE_FIELD
     - { name: title, label: Titre, widget: string, required: false, i18n: true }
     - { name: text, label: Texte, widget: string, required: false, i18n: true }
     - name: cta
@@ -54,6 +54,19 @@ hero_fields: &HERO_FIELDS
       fields:
         - { name: text, label: Texte, widget: string, i18n: true }
         - { name: url, label: URL, widget: string, i18n: true }
+    - *IMAGE_FIELD
+
+seo_fields: &SEO_FIELDS
+  name: seo
+  label: SEO
+  widget: object
+  required: false
+  i18n: true 
+  collapsed: true
+  fields:
+    - { name: title, label: Titre, widget: string, required: false, i18n: true }
+    - { name: description, label: Description, widget: string, required: false, i18n: true }
+    - *IMAGE_FIELD
 
 featured_image_fields: &FEATURED_IMAGE_FIELDS
   name: featured_image
@@ -178,8 +191,8 @@ collections:
     fields:
       - { label: "Index", name: "index", widget: "hidden", default: true, required: false, i18n: duplicate } # Hack to ignore _index
       - { label: Nom, name: title, widget: string, i18n: duplicate }
-      - { label: Description, name: description, widget: text, required: false, i18n: true }
       - *HERO_FIELDS
+      - *SEO_FIELDS
   
   # Pages
   - name: 'pages'
