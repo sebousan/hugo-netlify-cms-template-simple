@@ -150,7 +150,8 @@ collections:
     #i18n: true
     nested:
       depth: 2
-    slug: '{{slug}}/_index'
+    path: '{{slug}}/_index'
+    slug: '{{slug}}'
     filter: { field: index, value: false }
     fields:
       - { label: Titre, name: title, widget: string, i18n: true }
@@ -168,7 +169,8 @@ collections:
     filter: { field: index, value: false }
     nested:
       depth: 2
-    slug: '{{slug}}/_index'
+    path: '{{slug}}/_index'
+    slug: '{{slug}}'
     fields:
       - { label: "Index", name: "index", widget: "hidden", default: false, required: false, i18n: duplicate } # Hack to ignore _index
       - { label: Nom, name: title, widget: string, i18n: duplicate }
@@ -176,7 +178,7 @@ collections:
       - { label: Email, name: email, widget: string, required: false, i18n: duplicate }
       - { label: Twitter, name: twitter, widget: string, required: false, i18n: duplicate, hint: "Username" }
       - { label: Site web, name: website, widget: string, required: false, i18n: duplicate }
-  
+
   # Index pages
   - name: 'index'
     label: 'Index pages'
