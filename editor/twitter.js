@@ -1,21 +1,29 @@
 CMS.registerEditorComponent({
     id: "twitter",
     label: "Twitter",
-    fields: [{
-        name: "tid",
-        label: "Tweet id",
-        widget: "string"
-    }],
+    fields: [
+        {
+            name: "user",
+            label: "User",
+            widget: "string"
+        },
+        {
+            name: "id",
+            label: "Tweet id",
+            widget: "string"
+        }
+    ],
     pattern: /{{< tweet ([a-zA-Z0-9]+) >}}/,
     fromBlock: function(match) {
         return {
-            tid: match[1]
+            user: match[1],
+            id: match[2]
         };
     },
     toBlock: function(obj) {
-        return `{{< tweet ${obj.tid} >}}`;
+        return `{{< tweet user="${obj.user}" id="${obj.id}" >}}`;
     },
     toPreview: function(obj) {
-        return `{{< tweet ${obj.tid} >}}`;
+        return `{{< tweet user="${obj.user}" id="${obj.id}" >}}`;
     },
 });
