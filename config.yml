@@ -267,4 +267,4 @@ collections:
         fields:
           - { label: Nom du site, name: title, widget: string, i18n: true }
           - { label: Description, name: description, widget: text, i18n: true }
-          - { label: 'Image', name: 'image', widget: 'image', required: false, i18n: duplicate }
+          - *IMAGE_FIELD
