@@ -205,6 +205,8 @@ collections:
       preview: false
     create: true
     #i18n: true
+    nested:
+      depth: 3
     slug: '{{slug}}'
     fields:
       - { label: "Index", name: "index", widget: "hidden", default: false, required: false, i18n: duplicate } # Hack to ignore _index
@@ -213,8 +215,8 @@ collections:
       - *IMAGE_FIELD
       - { label: 'Extrait', name: 'description', widget: 'text', required: false, i18n: true }
       - { label: 'Contenu', name: 'body', widget: 'markdown', required: false, i18n: true  }
+    meta: { path: { widget: string, label: 'Chemin', index_file: 'index', hint: 'Arborescence complete : séparer les niveaux par un /' } }
 
-  
   # Menus
   - name: menu
     label: Menus
