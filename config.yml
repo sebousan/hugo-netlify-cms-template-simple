@@ -23,10 +23,26 @@ slug:
   sanitize_replacement: "-"
 
 # Fields
+index_field: &INDEX_FIELD
+  name: index
+  label: Index
+  widget: hidden
+  default: false
+  required: false
+  i18n: duplicate
+
+draft_field: &DRAFT_FIELD
+  name: draft
+  label: Brouillon
+  widget: boolean
+  default: true
+  required: false
+  i18n: duplicate
+
 image_field: &IMAGE_FIELD
-  name: 'image' 
-  label: 'Image'
-  widget: 'image' 
+  name: image
+  label: Image
+  widget: image 
   required: false 
   i18n: duplicate 
   media_library: 
@@ -43,16 +59,16 @@ title_field: &TITLE_FIELD
   i18n: true
 
 description_field: &DESCRIPTION_FIELD
-  name: 'description'
-  label: 'Description'
-  widget: 'text'
+  name: description
+  label: Description
+  widget: text
   required: false
   i18n: true
 
 content_field: &CONTENT_FIELD
-  name: 'body'
-  label: 'Contenu'
-  widget: 'markdown'
+  name: body
+  label: Contenu
+  widget: markdown
   required: false
   i18n: true
 
@@ -147,8 +163,8 @@ collections:
     path: "{{year}}/{{month}}/{{slug}}"
     filter: { field: index, value: false }
     fields:
-      - { label: "Index", name: "index", widget: "hidden", default: false, required: false, i18n: duplicate } # Hack to ignore _index
-      - { label: "Brouillon", name: "draft", widget: "boolean", default: true, required: false, i18n: duplicate }
+      - *INDEX_FIELD # Hack to ignore _index
+      - *DRAFT_FIELD
       - *TITLE_FIELD
       - { label: 'Date de publication', name: 'date', widget: 'datetime', i18n: duplicate }
       - *CATEGORIES_FIELD
@@ -191,7 +207,7 @@ collections:
     path: '{{slug}}/_index'
     slug: '{{slug}}'
     fields:
-      - { label: "Index", name: "index", widget: "hidden", default: false, required: false, i18n: duplicate } # Hack to ignore _index
+      - *INDEX_FIELD # Hack to ignore _index
       - <<: *TITLE_FIELD
         label: Nom
       - *DESCRIPTION_FIELD
@@ -229,7 +245,7 @@ collections:
       depth: 3
     slug: '{{slug}}'
     fields:
-      - { label: "Index", name: "index", widget: "hidden", default: false, required: false, i18n: duplicate } # Hack to ignore _index
+      - *INDEX_FIELD # Hack to ignore _index
       - { label: "Brouillon", name: "draft", widget: "boolean", default: true, required: false, i18n: duplicate }
       - *TITLE_FIELD
       - *IMAGE_FIELD
