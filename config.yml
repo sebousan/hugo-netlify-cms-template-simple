@@ -1,6 +1,6 @@
-# backend:
-#   name: git-gateway
-#   branch: main
+backend:
+  name: git-gateway
+  branch: main
 
 # Localhost
 local_backend: true
@@ -36,6 +36,26 @@ image_field: &IMAGE_FIELD
   media_folder: "/assets/images/uploads"
   public_folder: "/images/uploads"
 
+title_field: &TITLE_FIELD
+  name: title
+  label: Titre
+  widget: string
+  i18n: true
+
+description_field: &DESCRIPTION_FIELD
+  name: 'description'
+  label: 'Description'
+  widget: 'text'
+  required: false
+  i18n: true
+
+content_field: &CONTENT_FIELD
+  name: 'body'
+  label: 'Contenu'
+  widget: 'markdown'
+  required: false
+  i18n: true
+
 hero_fields: &HERO_FIELDS
   name: hero
   label: Hero
@@ -44,7 +64,7 @@ hero_fields: &HERO_FIELDS
   i18n: true 
   collapsed: true
   fields:
-    - { name: title, label: Titre, widget: string, required: false, i18n: true }
+    - *TITLE_FIELD
     - { name: text, label: Texte, widget: string, required: false, i18n: true }
     - name: cta
       label: CTA
@@ -65,7 +85,7 @@ seo_fields: &SEO_FIELDS
   collapsed: true
   fields:
     - { name: title, label: Titre, widget: string, required: false, i18n: true }
-    - { name: description, label: Description, widget: string, required: false, i18n: true }
+    - *DESCRIPTION_FIELD
     - *IMAGE_FIELD
 
 featured_image_fields: &FEATURED_IMAGE_FIELDS
@@ -105,10 +125,9 @@ links_fields: &LINKS_FIELDS
   i18n: true
   required: false
   fields:
-    - { label: Titre, name: title, widget: string, i18n: true }
+    - *TITLE_FIELD
     - { label: Lien, name: link, widget: string, i18n: true }
     - { label: "Blank?", name: "blank", widget: "boolean", default: false, required: false, i18n: duplicate }
-
 
 
 
@@ -130,13 +149,13 @@ collections:
     fields:
       - { label: "Index", name: "index", widget: "hidden", default: false, required: false, i18n: duplicate } # Hack to ignore _index
       - { label: "Brouillon", name: "draft", widget: "boolean", default: true, required: false, i18n: duplicate }
-      - { label: 'Titre', name: 'title', widget: 'string', i18n: true }
+      - *TITLE_FIELD
       - { label: 'Date de publication', name: 'date', widget: 'datetime', i18n: duplicate }
       - *CATEGORIES_FIELD
       - *AUTHORS_FIELD
       - *IMAGE_FIELD
-      - { label: 'Extrait', name: 'description', widget: 'text', required: false, i18n: true }
-      - { label: 'Contenu', name: 'body', widget: 'markdown', required: false, i18n: true  }
+      - *DESCRIPTION_FIELD
+      - *CONTENT_FIELD
 
 
   # Categories (taxonomy)
@@ -154,7 +173,7 @@ collections:
     slug: '{{slug}}'
     filter: { field: index, value: false }
     fields:
-      - { label: Titre, name: title, widget: string, i18n: true }
+      - *TITLE_FIELD
   
 
   # Authors (taxonomy)
@@ -173,8 +192,9 @@ collections:
     slug: '{{slug}}'
     fields:
       - { label: "Index", name: "index", widget: "hidden", default: false, required: false, i18n: duplicate } # Hack to ignore _index
-      - { label: Nom, name: title, widget: string, i18n: duplicate }
-      - { label: Description, name: description, widget: text, required: false, i18n: true }
+      - <<: *TITLE_FIELD
+        label: Nom
+      - *DESCRIPTION_FIELD
       - { label: Email, name: email, widget: string, required: false, i18n: duplicate }
       - { label: Twitter, name: twitter, widget: string, required: false, i18n: duplicate, hint: "Username" }
       - { label: Site web, name: website, widget: string, required: false, i18n: duplicate }
@@ -192,7 +212,7 @@ collections:
       depth: 3
     fields:
       - { label: "Index", name: "index", widget: "hidden", default: true, required: false, i18n: duplicate } # Hack to ignore _index
-      - { label: Nom, name: title, widget: string, i18n: duplicate }
+      - *TITLE_FIELD
       - *HERO_FIELDS
       - *SEO_FIELDS
   
@@ -211,10 +231,10 @@ collections:
     fields:
       - { label: "Index", name: "index", widget: "hidden", default: false, required: false, i18n: duplicate } # Hack to ignore _index
       - { label: "Brouillon", name: "draft", widget: "boolean", default: true, required: false, i18n: duplicate }
-      - { label: 'Titre', name: 'title', widget: 'string', i18n: true }
+      - *TITLE_FIELD
       - *IMAGE_FIELD
-      - { label: 'Extrait', name: 'description', widget: 'text', required: false, i18n: true }
-      - { label: 'Contenu', name: 'body', widget: 'markdown', required: false, i18n: true  }
+      - *DESCRIPTION_FIELD
+      - *CONTENT_FIELD
     meta: { path: { widget: string, label: 'Chemin', index_file: 'index', hint: 'Arborescence complete : séparer les niveaux par un /' } }
 
   # Menus
@@ -268,5 +288,5 @@ collections:
         i18n: true
         fields:
           - { label: Nom du site, name: title, widget: string, i18n: true }
-          - { label: Description, name: description, widget: text, i18n: true }
+          - *DESCRIPTION_FIELD
           - *IMAGE_FIELD
