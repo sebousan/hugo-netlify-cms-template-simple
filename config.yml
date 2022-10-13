@@ -223,6 +223,7 @@ collections:
       preview: false
     create: false
     #i18n: true
+    summary: "{{title}} ({{dirname}})"
     filter: { field: index, value: true }
     nested:
       depth: 3
@@ -241,17 +242,23 @@ collections:
       preview: false
     create: true
     #i18n: true
+    slug: '{{slug}}'
     nested:
       depth: 3
-    slug: '{{slug}}'
+    meta: { 
+      path: { 
+        widget: string, label: 'Chemin', index_file: 'index', hint: 'Arborescence complete : séparer les niveaux par un /'
+      }
+    }
     fields:
       - *INDEX_FIELD # Hack to ignore _index
-      - { label: "Brouillon", name: "draft", widget: "boolean", default: true, required: false, i18n: duplicate }
+      - { label: Layout, name: layout, widget: select, options: [blocks], required: false, i18n: duplicate }
+      - *DRAFT_FIELD
       - *TITLE_FIELD
       - *IMAGE_FIELD
       - *DESCRIPTION_FIELD
       - *CONTENT_FIELD
-    meta: { path: { widget: string, label: 'Chemin', index_file: 'index', hint: 'Arborescence complete : séparer les niveaux par un /' } }
+    
 
   # Menus
   - name: menu
