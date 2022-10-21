@@ -39,7 +39,7 @@
 ## Installation 
 Ajouter ce repository en tant que subdomaine dans votre projet hugo :
 ```
-git submodule add git@github.com:sebousan/hugo-netlify-cms-template static/admin
+git submodule add git@github.com:sebousan/hugo-netlify-cms-template-simple static/admin
 ```
 
 ## License
