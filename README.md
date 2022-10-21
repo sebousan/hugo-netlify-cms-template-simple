@@ -1,4 +1,4 @@
-# Hugo Netlify CMS Template
+# Hugo Netlify CMS Template simple
 
 ## Table des matières
 
