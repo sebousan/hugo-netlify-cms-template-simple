@@ -1,16 +1,13 @@
 # Hugo Netlify CMS Template simple
 
-## Table des matières
+## Table of content
 
-- [Fonctionnalités](#fonctionnalités)
-- [Captures d’écran](#captures-décran)
-- [Dépots liés](#dépots-liés)
-- [Live demo](#live-demo)
-- [Installation](#installation)
+- [Features](#features)
+- [Screenshot](#screenshot)
+- [Install](#install)
 - [License](#license)
 
-
-## Fonctionnalités
+## Features
 - posts
 - authors
 - categories
@@ -26,21 +23,14 @@
   - social  
 - config
 
-## Captures d’écran
+## Screenshot
 ![screenshot-admin-posts](https://user-images.githubusercontent.com/4457294/194070621-5cde9d70-54dd-4f48-a3cb-94869699c0ce.png)
 
-## Dépots liés
-* Template Hugo : [Hugo template](https://github.com/sebousan/hugo-template)
-* Theme Hugo : [Hugo theme](https://github.com/sebousan/hugo-theme)
-
-## Live demo
-- Front : https://sebousan-hugo-theme.netlify.app
-
-## Installation 
-Ajouter ce repository en tant que subdomaine dans votre projet hugo :
+## Install
+Add this repository as a subdomain in your hugo project:
 ```
 git submodule add git@github.com:sebousan/hugo-netlify-cms-template-simple static/admin
 ```
 
 ## License
-Ce repository est sous licence MIT
+This repository is under licence MIT
